@@ -8,6 +8,13 @@
 import UIKit
 
 class QuestionBuilderViewController: UIViewController {
+
+
+    @IBOutlet weak var addQuestion: UITextField!
+    
+    @IBOutlet weak var correctAnswer: UITextField!
+    
+
     override func viewDidLoad() {
             super.viewDidLoad()}
 
@@ -17,7 +24,15 @@ class QuestionBuilderViewController: UIViewController {
     
     
     @IBAction func doneQuestion(_ sender: Any) {
+        guard let text = addQuestion.text, text.isEmpty else {
+                    return     }
+        
+        let listViewController = QuestionBankViewController()
+                listViewController.addItem(text)
+
+              
+                navigationController?.pushViewController(listViewController, animated: true)
+        
         let vc = storyboard?.instantiateViewController(withIdentifier: "questionbank_vc") as! QuestionBankViewController
-                present(vc, animated: true)     }
-    
+                present(vc, animated: true)            }
 }
